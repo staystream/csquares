@@ -47,7 +47,7 @@ class Csquare
     [a,b].each_with_index do |it,i| 
       it.first.insert(0,"0") while it.first.size <= i+1
       if i == 1
-        it[0] = it.first[0,2],it.first[2,2] if i == 1
+        it[0] = it.first[0,2],it.first[2,2]
       else
         it[0] = it.first.split("")
       end
