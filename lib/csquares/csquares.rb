@@ -13,13 +13,13 @@ class Csquare
 
   def sq(i=0.1)
     n = 6 + (3 * Math.log10(i).abs).ceil
-    sq = case i
+    it = case i
       when 10 then @digits[0..3]
       when 5 then @digits[0..4]
       when 1 then @digits[0..6]
       else @digits[0..n]
     end
-    delimit [sq[0..3],*sq[4..-1].chunk_into(3)]
+    delimit [it[0..3],*it[4..-1].chunk_into(3)]
   end
 
   private
