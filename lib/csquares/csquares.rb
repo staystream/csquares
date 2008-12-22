@@ -1,7 +1,9 @@
-class Csquare
+class CSquare
 
   attr_reader :lat, :lng, :code, :digits
 
+  KM = {10 => 0.1, 50 => 0.5, 100 => 1, 500 => 5, 1000 => 10}
+ 
   def initialize(lat,lng)
     @lat, @lng = lat.to_f,lng.to_f
     digits = pad_and_interleave.insert(0,global_quadrant)

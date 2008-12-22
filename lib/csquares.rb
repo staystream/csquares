@@ -4,6 +4,6 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'csquares/core_ext'
 require 'csquares/csquares'
 
-module Csquares
+module CSquares
   VERSION = '1.0.0'
 end

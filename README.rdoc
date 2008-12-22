@@ -11,7 +11,7 @@ http://www.cmar.csiro.au/csquares/csq-faq.htm
 
 == SYNOPSIS:
 
-csquare = Csquare.new(38.8894, -77.0356)
+csquare = CSquare.new(38.8894, -77.0356)
 csquare.code
 csquare.digits
 csquare.sq(0.01)
