@@ -5,5 +5,5 @@ require 'csquares/core_ext'
 require 'csquares/csquares'
 
 module CSquares
-  VERSION = '1.0.0'
+  VERSION = '0.1.0'
 end
