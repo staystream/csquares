@@ -31,7 +31,7 @@ class CSquare
     if lat >= 0
       lng >= 0 ? 1 : 7
     else
-		  lng >= 0 ? 3 : 5
+      lng >= 0 ? 3 : 5
     end
   end
 
