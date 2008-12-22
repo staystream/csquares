@@ -2,6 +2,8 @@
 
 http://github.com/broughcut/csquares
 
+`gem install csquares'
+
 == DESCRIPTION:
 
 http://www.cmar.csiro.au/csquares/csq-faq.htm
