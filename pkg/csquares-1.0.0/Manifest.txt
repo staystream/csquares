@@ -1,0 +1,11 @@
+History.txt
+Manifest.txt
+README.rdoc
+Rakefile
+lib/csquares.rb
+lib/csquares/csquares.rb
+lib/csquares/core_ext.rb
+script/console
+script/destroy
+script/generate
+test/test_csquares.rb
