@@ -11,7 +11,7 @@ class Csquare
     @digits = chunks.join.split("").map {|it| it.to_i}
   end
 
-  def sq(i=0.1)
+  def sq(i=0.1,int=false)
     n = 6 + (3 * Math.log10(i).abs).ceil
     it = case i
       when 10 then @digits[0..3]
@@ -19,7 +19,8 @@ class Csquare
       when 1 then @digits[0..6]
       else @digits[0..n]
     end
-    delimit [it[0..3],*it[4..-1].chunk_into(3)]
+    result = delimit [it[0..3],*it[4..-1].chunk_into(3)]
+    int ? result.gsub(/:/){}.to_i : result
   end
 
   private
