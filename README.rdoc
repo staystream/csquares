@@ -1,6 +1,6 @@
 = csquares
 
-http://github.com/broughcut/csquares
+http://github.com/staystream/csquares
 
 `gem install csquares'
 
