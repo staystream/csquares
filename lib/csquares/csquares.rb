@@ -1,6 +1,6 @@
 class CSquare
 
-  attr_reader :lat, :lng, :code, :digits
+  attr_reader :lat, :lng, :code, :digits, :radius, :degrees
 
   METERS = {0.0001 => 11, 0.0005 => 55, 0.001 => 110, 0.005 => 550, 
             0.01 => 1100, 0.05 => 5500, 0.1 => 11000, 0.5 => 55000,
@@ -8,7 +8,8 @@ class CSquare
 
   KM = {1 => 0.01, 5 => 0.05, 10 => 0.1, 50 => 0.5, 100 => 1, 500 => 5, 1000 => 1}
  
-  def initialize(lat,lng)
+  def initialize(lat, lng=nil)
+    return decode lat unless lng
     @lat, @lng = lat.to_f,lng.to_f
     digits = pad_and_interleave.insert(0,global_quadrant)
     chunks = chunk_up(digits)
@@ -17,7 +18,7 @@ class CSquare
     @digits = chunks.join.split("").map {|it| it.to_i}
   end
 
-  def sq(i=0.1,int=false)
+  def sq(i=0.1, int=false)
     n = 6 + (3 * Math.log10(i).abs).ceil
     it = case i
       when 10 then @digits[0..3]
@@ -70,5 +71,53 @@ class CSquare
 
   def delimit(chunks)
     chunks.map {|it| it.join("")}.join(":").sub(/:$/){}
+  end
+
+  def decode(it)
+    i = it.to_s.gsub(/\D/){}
+    n = case i.size
+    when 5, 6
+      [500, 5]
+    when 7
+      [100, 7]
+    when 8, 9
+      [50, 8]
+    when 10
+      [10, 10]
+    when 11, 12
+      [5, 11]
+    when 13
+      [1, 13]
+    else
+      [1, 14]
+    end
+    @radius = n.first
+    @degrees = KM[@radius]
+    @code = i[0,n.last]
+    a = i.split("")
+    return false if a.size < 7
+    b, c = a[0..3], a[4..-1].chunk_into(3)
+    lat = [b[1], c.map {|it| it[1]}]
+    lng = [b[2..3], c.map {|it| it[2]}].flatten.compact
+    lng.delete_at(0) if lng.first == "0"
+    if c.last.size < 3
+      case c.last.first
+      when '4'
+        lat << 5
+        lng << 5
+      when '3'
+        lat << 5
+      when '2'
+        lng << 5
+      end
+    end
+    @lat, @lng = [lat, lng].map {|it| it.join.insert(2,'.').to_f}
+    gq = a.first.to_i
+    if @lat >= 0
+      @lng *= -1 if gq == 7
+    else
+      @lng *= -1 if gq == 5
+    end
+ 
   end
 end
